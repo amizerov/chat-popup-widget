@@ -1,0 +1,84 @@
+.chatBody {
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.2; /* Уменьшено расстояние между строками внутри сообщений */
+    height: 260px; /* Фиксированная высота */
+    overflow-y: auto; /* Скролл для сообщений */
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+    flex-grow: 1; /* Позволяет элементу занимать оставшееся пространство */
+
+    /* Стилизация скроллбара */
+    &::-webkit-scrollbar {
+      width: 8px; /* Ширина скроллбара */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2); /* Полупрозрачный цвет */
+      border-radius: 4px; /* Закругленные края */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0.4); /* Более насыщенный цвет при наведении */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent; /* Прозрачный трек */
+    }
+  
+    .userMessage {
+        background-color: #e0f7fa;
+        padding: 8px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+        align-self: flex-end;
+        max-width: 80%;
+        text-align: left; /* Выравнивание текста по правому краю */
+    }
+    
+    .assistantMessage {
+        background-color: #f1f1f1;
+        padding: 8px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+        align-self: flex-start;
+        max-width: 80%;
+        text-align: left; /* Выравнивание текста по левому краю */
+    }
+        
+    .typingIndicator {
+      display: flex;
+      justify-content: flex-start;
+      gap: 5px;
+    }
+
+    .typingIndicator span {
+      width: 8px;
+      height: 8px;
+      background-color: #888;
+      border-radius: 50%;
+      animation: typing 1.5s infinite ease-in-out;
+    }
+
+    .typingIndicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typingIndicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0%, 80%, 100% {
+        transform: scale(0);
+      }
+      40% {
+        transform: scale(1);
+      }
+    }
+}
