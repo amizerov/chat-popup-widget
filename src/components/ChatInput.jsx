@@ -1,7 +1,6 @@
 // filepath: d:\Argo\chat-popup-widget\src\Components\ChatInput.jsx
 import { useState } from 'react';
 import styles from './ChatInput.module.scss';
-import { handleSendMessage } from '../utils/messageHandler.jsx';
 
 export default function ChatInput({ onSendMessage }) {
   const [userMessage, setUserMessage] = useState('');

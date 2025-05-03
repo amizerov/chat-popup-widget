@@ -1,3 +1,7 @@
+import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 import styles from './ChatBody.module.scss';
 import { useEffect, useRef } from 'react';
 
@@ -11,15 +15,36 @@ export default function ChatBody({ chatHistory, isThinking }) {
     }
   }, [chatHistory, isThinking]);
 
-  // Функция для обработки текста (замена \n на <br>)
+  // Функция для обработки текста с поддержкой Markdown, включая формулы
   const formatMessage = (text) => {
-    return text.split('\n').map((line, index) => (
-      <span key={index}>
-        {line}
-        <br />
-      </span>
-    ));
-  };
+    // Обрабатываем блочные формулы \[ \n...\n \] -> $$...$$
+    let formattedText = text.replace(/\\\[\s*([\s\S]*?)\s*\\\]/g, (_, formula) => {
+      const trimmedFormula = formula.trim();
+      return `$$${trimmedFormula}$$`;
+    });
+  
+    // Обрабатываем строчные формулы \( ... \) -> $...$
+    formattedText = formattedText.replace(/\\\(\s*([\s\S]*?)\s*\\\)/g, (_, formula) => {
+      const trimmedFormula = formula.trim();
+      return `$${trimmedFormula}$`;
+    });
+  
+    //console.log("Formatted:", formattedText); // Для отладки
+  
+    return (
+      <ReactMarkdown
+        children={formattedText}
+        remarkPlugins={[remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+        components={{
+          // Улучшаем отображение формул
+          math: ({node, ...props}) => <div style={{margin: "10px 0"}} {...props} />,
+          inlineMath: ({node, ...props}) => <span {...props} />
+        }}
+        breaks
+      />
+    );
+  };``
 
   return (
     <div className={styles.chatBody} ref={chatBodyRef}>

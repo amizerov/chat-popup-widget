@@ -39,6 +39,9 @@
         align-self: flex-end;
         max-width: 80%;
         text-align: left; /* Выравнивание текста по правому краю */
+        p {
+          color: #424242;
+        }
     }
     
     .assistantMessage {
@@ -49,6 +52,9 @@
         align-self: flex-start;
         max-width: 80%;
         text-align: left; /* Выравнивание текста по левому краю */
+        p {
+          color: #424242;
+        }
     }
         
     .typingIndicator {

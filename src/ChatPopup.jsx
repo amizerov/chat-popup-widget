@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import ChatBody from './Components/ChatBody.jsx';
 import styles from './ChatPopup.module.scss';
 import ChatHeader from './components/ChatHeader.jsx';
-import ChatBody from './components/ChatBody.jsx';
 import ChatInput from './components/ChatInput.jsx';
 import ChatToggleButton from './components/TogleButton.jsx';
 import { handleSendMessage } from './utils/messageHandler.jsx';
@@ -42,7 +42,8 @@ export default function ChatPopup() {
 
   const onSendMessage = (userMessage) => {
     setIsThinking(true); // Показываем анимацию
-    handleSendMessage(userMessage, setChatHistory, () => setIsThinking(false)); // Скрываем анимацию после ответа
+    handleSendMessage(userMessage, setChatHistory, () => setIsThinking(false)); 
+    // Скрываем анимацию после ответа
   };
 
   // Автоскролл вниз при добавлении нового сообщения
